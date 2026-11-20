@@ -1,0 +1,19 @@
+{
+  "name": "Fractionation Simulator",
+  "short_name": "Fractionation",
+  "description": "Oleochemical Process Simulation System",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0c131a",
+  "theme_color": "#101820",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101820">
+  <meta name="description" content="Fractionation Simulator — Oleochemical Process Simulation System">
+  <title>Fractionation Simulator</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="brand-mark">FS</div>
+      <div class="eyebrow">OLEOCHEMICAL PROCESS TOOLS</div>
+      <h1>Fractionation<br><span>Simulator</span></h1>
+      <p class="muted">Process simulation workspace</p>
+      <form id="login-form">
+        <label>Username<input id="username" autocomplete="username" placeholder="Masukkan username" required></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" placeholder="Masukkan password" required></label>
+        <button class="button primary full" type="submit">Sign in <span>→</span></button>
+      </form>
+      <p class="login-note" id="login-note">Login akan aktif setelah backend Google Sheets dikonfigurasi.</p>
+      <div class="login-footer">INTERNAL SIMULATION WORKSPACE · v1.0</div>
+    </div>
+  </div>
+
+  <div id="app-shell" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-brand"><div class="brand-mark small">FS</div><div><b>FRACTIONATION</b><small>SIMULATOR</small></div></div>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" data-page="dashboard"><span>▦</span> Dashboard</button>
+      <button class="nav-item" data-page="simulation"><span>◉</span> Simulation</button>
+      <button class="nav-item" data-page="material"><span>▤</span> Material Balance</button>
+      <button class="nav-item" data-page="bubble"><span>◌</span> Bubble Point</button>
+      <button class="nav-item" data-page="boiling"><span>⌁</span> Boiling Point</button>
+      <div class="side-label">SYSTEM</div>
+      <button class="nav-item" data-page="history"><span>◷</span> Simulation History</button>
+      <button class="nav-item" data-page="settings"><span>⚙</span> Settings</button>
+      <div class="sidebar-bottom">
+        <div class="connection"><i></i><span>Frontend ready</span></div>
+        <div class="user-mini"><div class="avatar" id="avatar-initial">U</div><div><b id="side-username">User</b><small id="side-role">Guest</small></div><button id="logout-btn" title="Logout">↗</button></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="Open menu">☰</button>
+        <div><div class="eyebrow" id="crumb">WORKSPACE / OVERVIEW</div><h2 id="page-title">Dashboard</h2></div>
+        <div class="top-actions"><span class="status-pill"><i></i> SYSTEM ONLINE</span><span class="date-label" id="today-label"></span></div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-row"><div><div class="eyebrow">PROCESS ENGINEERING WORKSPACE</div><h1>Simulation overview</h1><p class="muted">Monitor and prepare your fractionation calculations.</p></div><button class="button primary" data-go="simulation">New simulation <span>＋</span></button></div>
+        <div class="notice"><b>Calculation engine belum diaktifkan.</b><span>Antarmuka sudah siap. Formula dari workbook perlu dipetakan dan divalidasi sebelum hasil simulasi ditampilkan.</span></div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span>SIMULATIONS</span><span class="stat-icon">◉</span></div><strong id="stat-simulations">0</strong><small>Saved in this browser session</small></article>
+          <article class="stat-card"><div class="stat-top"><span>LAST FEED RATE</span><span class="stat-icon">⇢</span></div><strong>— <em>kg/hr</em></strong><small>Waiting for validated calculation</small></article>
+          <article class="stat-card"><div class="stat-top"><span>MODEL STATUS</span><span class="stat-icon">⌁</span></div><strong class="state-pending">Pending</strong><small>Excel formula verification required</small></article>
+          <article class="stat-card"><div class="stat-top"><span>DATA CONNECTION</span><span class="stat-icon">◎</span></div><strong class="state-pending">Not set</strong><small>Google Sheets backend</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><div class="eyebrow">QUICK ACCESS</div><h3>Simulation modules</h3></div><span class="tag">4 MODULES</span></div>
+            <div class="module-list">
+              <button class="module-row" data-go="simulation"><span class="module-icon">◉</span><span><b>Process Simulation</b><small>Set feed and operating parameters</small></span><span class="arrow">→</span></button>
+              <button class="module-row" data-go="material"><span class="module-icon">▤</span><span><b>Material Balance</b><small>Review component distribution</small></span><span class="arrow">→</span></button>
+              <button class="module-row" data-go="bubble"><span class="module-icon">◌</span><span><b>Bubble Point</b><small>Bubble point solver workspace</small></span><span class="arrow">→</span></button>
+              <button class="module-row" data-go="boiling"><span class="module-icon">⌁</span><span><b>Boiling Point</b><small>Component property reference</small></span><span class="arrow">→</span></button>
+            </div>
+          </article>
+          <article class="panel"><div class="panel-heading"><div><div class="eyebrow">PROJECT STATUS</div><h3>Build progress</h3></div></div>
+            <div class="progress-item"><div><span>Application interface</span><b>Ready</b></div><div class="progress"><i style="width:100%"></i></div></div>
+            <div class="progress-item"><div><span>PWA configuration</span><b>Ready</b></div><div class="progress"><i style="width:100%"></i></div></div>
+            <div class="progress-item"><div><span>Google Sheets login</span><b>Pending</b></div><div class="progress"><i style="width:8%"></i></div></div>
+            <div class="progress-item"><div><span>Excel calculation engine</span><b>Pending</b></div><div class="progress"><i style="width:8%"></i></div></div>
+            <p class="small muted">Progress is a project checklist, not a plant readiness indicator.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="page-simulation">
+        <div class="page-intro"><div class="eyebrow">SIMULATION / INPUT</div><h1>Process simulation</h1><p class="muted">Enter operating conditions for a new simulation case.</p></div>
+        <div class="notice warning"><b>Calculation disabled for validation.</b><span>Input form ini belum menghasilkan angka proses. Engine akan dihubungkan setelah formula workbook diperiksa satu per satu.</span></div>
+        <div class="panel">
+          <div class="panel-heading"><div><div class="eyebrow">CASE CONFIGURATION</div><h3>Operating parameters</h3></div><span class="tag">DRAFT INPUT</span></div>
+          <form id="simulation-form" class="form-grid">
+            <label>Case name<input id="case-name" placeholder="Contoh: Run 001" required></label>
+            <label>Feed rate <span class="unit">kg/hr</span><input type="number" id="feed-rate" min="0" step="any" placeholder="Enter value"></label>
+            <label>Operating pressure <span class="unit">mbar</span><input type="number" id="pressure" min="0" step="any" placeholder="Enter value"></label>
+            <label>Feed temperature <span class="unit">°C</span><input type="number" id="feed-temp" step="any" placeholder="Enter value"></label>
+            <label>Top fraction target <span class="unit">%</span><input type="number" id="top-fraction" min="0" max="100" step="any" placeholder="Enter value"></label>
+            <label>Side fraction target <span class="unit">%</span><input type="number" id="side-fraction" min="0" max="100" step="any" placeholder="Enter value"></label>
+            <div class="form-actions"><button type="reset" class="button secondary">Clear form</button><button type="submit" class="button primary">Save draft case <span>→</span></button></div>
+          </form>
+        </div>
+        <div class="panel result-placeholder"><div class="eyebrow">SIMULATION RESULT</div><h3>Results will appear here</h3><p class="muted">No calculation is performed yet. We will implement and compare the exact Excel logic before enabling this panel.</p></div>
+      </section>
+
+      <section class="page" id="page-material">
+        <div class="page-intro"><div class="eyebrow">SIMULATION / MATERIAL BALANCE</div><h1>Material balance</h1><p class="muted">Component-by-component mass balance workspace.</p></div>
+        <div class="notice warning"><b>Waiting for workbook mapping.</b><span>Nama komponen, basis komposisi, rumus distribusi, dan total balance harus mengikuti workbook sumber.</span></div>
+        <div class="panel"><div class="panel-heading"><div><div class="eyebrow">COMPONENT TABLE</div><h3>Composition breakdown</h3></div><span class="tag">NOT CALCULATED</span></div>
+          <div class="table-wrap"><table><thead><tr><th>Component</th><th>Feed composition</th><th>Feed flow</th><th>Top</th><th>Side</th><th>Bottom</th></tr></thead><tbody><tr><td colspan="6" class="empty-cell">Component data will be loaded from the validated calculation model.</td></tr></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-bubble">
+        <div class="page-intro"><div class="eyebrow">THERMODYNAMICS / SOLVER</div><h1>Bubble point</h1><p class="muted">Bubble point calculation workspace.</p></div>
+        <div class="notice warning"><b>Solver not enabled.</b><span>Metode iterasi dan korelasi tekanan-temperatur akan direplikasi dari workbook. Jangan gunakan placeholder ini untuk keputusan operasi.</span></div>
+        <div class="content-grid"><article class="panel"><div class="eyebrow">INPUT</div><h3>Solver conditions</h3><label>Pressure <span class="unit">mbar</span><input type="number" placeholder="Awaiting model mapping" disabled></label><label>Initial temperature <span class="unit">°C</span><input type="number" placeholder="Awaiting model mapping" disabled></label></article><article class="panel"><div class="eyebrow">OUTPUT</div><h3>Bubble point temperature</h3><div class="big-placeholder">— °C</div><p class="muted">No result until the solver is validated.</p></article></div>
+      </section>
+
+      <section class="page" id="page-boiling">
+        <div class="page-intro"><div class="eyebrow">THERMODYNAMICS / DATABASE</div><h1>Boiling point</h1><p class="muted">Reference property table from the source workbook.</p></div>
+        <div class="notice warning"><b>Reference data not loaded.</b><span>Data boiling point akan diambil dari worksheet Boiling Point. Nilai tidak akan diisi berdasarkan perkiraan.</span></div>
+        <div class="panel"><div class="panel-heading"><div><div class="eyebrow">PROPERTY DATABASE</div><h3>Component properties</h3></div></div><div class="table-wrap"><table><thead><tr><th>Component</th><th>Normal boiling point</th><th>Pressure basis</th><th>Source</th></tr></thead><tbody><tr><td colspan="4" class="empty-cell">Source workbook data has not been imported.</td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-history">
+        <div class="page-intro"><div class="eyebrow">WORKSPACE / RECORDS</div><h1>Simulation history</h1><p class="muted">Draft cases saved during this browser session.</p></div>
+        <div class="panel"><div class="panel-heading"><div><div class="eyebrow">RECENT ACTIVITY</div><h3>Saved cases</h3></div><button class="button secondary small-button" id="clear-history">Clear session</button></div><div class="table-wrap"><table><thead><tr><th>Case</th><th>Feed rate</th><th>Pressure</th><th>Created</th><th>Status</th></tr></thead><tbody id="history-body"><tr><td colspan="5" class="empty-cell">No cases saved in this session.</td></tr></tbody></table></div></div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="page-intro"><div class="eyebrow">SYSTEM / PREFERENCES</div><h1>Settings</h1><p class="muted">Application configuration and connection status.</p></div>
+        <div class="content-grid"><article class="panel"><div class="eyebrow">APPLICATION</div><h3>Workspace information</h3><div class="setting-row"><span>Application version</span><b>1.0.0</b></div><div class="setting-row"><span>Application type</span><b>Progressive Web App</b></div><div class="setting-row"><span>Calculation engine</span><b class="state-pending">Not connected</b></div></article><article class="panel"><div class="eyebrow">DATA CONNECTION</div><h3>Google Sheets</h3><p class="muted">Backend URL and spreadsheet configuration will be added after the Apps Script service is deployed and secured.</p><div class="setting-row"><span>Connection</span><b class="state-pending">Not configured</b></div></article></div>
+      </section>
+
+      <footer class="app-footer"><span>FRACTIONATION SIMULATOR</span><span>For engineering simulation & analysis · Not a DCS control system</span></footer>
+    </main>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
